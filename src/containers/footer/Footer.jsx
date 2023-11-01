@@ -5,7 +5,7 @@ import './footer.css'
 const Footer = () =>{
     return(
         <footer>
-            <div class="footer">
+            <div className="footer">
                 <p>2021 Fidenz Technologies</p>
             </div>
             
