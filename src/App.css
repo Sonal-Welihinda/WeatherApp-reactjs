@@ -12,3 +12,12 @@ body {
   background-position: 0 -90px;
   
 }
+
+@media only screen and (max-width: 550px) {
+
+
+  body {
+    background-size: 200%;
+    background-position: 0 -0px;
+  }
+}

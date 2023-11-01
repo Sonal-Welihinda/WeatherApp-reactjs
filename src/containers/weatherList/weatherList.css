@@ -9,3 +9,8 @@
     gap: 20px;
     /* meadia quary gap */
 }
+
+
+@media only screen and (max-width: 550px) {
+    
+}

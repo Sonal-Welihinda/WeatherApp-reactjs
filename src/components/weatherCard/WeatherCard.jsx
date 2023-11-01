@@ -219,7 +219,7 @@ const WeatherCard = ({weatherDATA, onRemove}) =>{
                 <div className="wc-bottom-mid">
                     <img src={require('../../assets/images/direction.png')} alt="direction" />
                     <div>
-                        {windSpeed+"m/s "+windDeg+" degrees"}
+                        {windSpeed+"m/s "}<br className="hiddenBrake"/>{windDeg+" degrees"}
                     </div>
                 </div>
 

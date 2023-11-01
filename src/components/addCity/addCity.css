@@ -36,3 +36,20 @@
     /* border-width: 5px; */
     /* left: -100px; */
 }
+
+@media only screen and (max-width: 550px) {
+
+    #citySearchIP {
+        width: 60vw;
+        font-size: 4vw;
+        border: 0px none none;
+        outline: 0px;
+        min-width: 40vw;
+    }
+    
+    #searchBtn{
+        font-size: 4vw;
+    }
+    
+}
+
