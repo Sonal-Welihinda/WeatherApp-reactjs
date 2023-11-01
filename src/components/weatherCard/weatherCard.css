@@ -1,4 +1,5 @@
 .weather-card{
+    font-family: var(--font-Style);
     min-width: 461px;
     max-width: 30vw;
     width: 30vw;
@@ -68,6 +69,8 @@
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     background-image: url("../../assets/images/cloud-bg.png");
+    background-repeat: no-repeat;
+    background-position: 0px 100%;
     
     /* border-radius: 30px; */
 }
@@ -105,7 +108,8 @@
     width: min-content;
     margin-left: auto;
     margin-right: auto;
-    font-size: 2vw;
+    font-size: 2.2vw;
+    font-weight: bold;
     white-space: nowrap;
 }
 
@@ -115,6 +119,7 @@
     margin-right: auto;
     white-space: nowrap;
     font-size: 2vh;
+    
 }
 
 .weather-card.active .wc-top .wc-topTop .wc-location{
@@ -162,12 +167,18 @@
     margin-bottom: auto;
 }
 
+.weather-card  .wc-top .wc-topL .wc-status span,.weather-card.active  .wc-top .wc-topL .wc-status span{
+    /* font-size: 100px; */
+    font-weight: 600;
+}
+
 .weather-card.active  .wc-top .wc-topL .wc-status img,.weather-card.active  .wc-top .wc-topL .wc-status span{
     margin-left: auto;
     justify-content: center;
     margin-right: auto;
     text-align: center;
     display: block;
+    
 
 }
 
@@ -195,6 +206,7 @@
 .weather-card .wc-top .wc-topR .wc-tempAvg{
     margin-bottom: 2vh;
     font-size: 5vh;
+    font-weight: 600;
     
 }
 
@@ -242,8 +254,8 @@
 }
 
 .weather-card .wc-bottom .wc-bottom-mid{
-    padding-left: 5%;
-    padding-right: 5%;
+    padding-left: 1.5%;
+    padding-right: 1.5%;
     border-left: 1px solid #515566 ;
     border-right: 1px solid #515566 ;
 }
