@@ -4,9 +4,12 @@ import './footer.css'
 
 const Footer = () =>{
     return(
-        <div>
-
-        </div>
+        <footer>
+            <div class="footer">
+                <p>2021 Fidenz Technologies</p>
+            </div>
+            
+        </footer>
     );
 }
 

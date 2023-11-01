@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import './creds'
+import weatherApiKey from './creds'
 // import { QueryClient, QueryClientProvider } from 'react-query';
 
 // import {caches} from "react";
