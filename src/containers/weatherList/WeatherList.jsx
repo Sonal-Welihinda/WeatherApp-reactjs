@@ -96,13 +96,16 @@ async function getCityCodes () {
 
 async function cacheMangement(){
     setInterval(async function(){
-        await caches.open("weatherData").then(async function(cache) {
-            await caches.keys().then(function(names) {
-                for (let name of names)
-                    cache.delete(name); 
-            });
-        });
-    }, 5000);
+        try {
+            const cache = await caches.open("weatherData");
+            const keys = await cache.keys();
+            for (let key of keys) {
+              await cache.delete(key);
+            }
+        } catch (error) {
+        console.error("Cache management error: " + error);
+        }
+    },  300000);
 }
 
 
@@ -115,7 +118,7 @@ const WeatherList = () =>{
 
     async function getCitisCallback(){
         setWeatherCards([... await getCityCodes()]);
-        cacheMangement();
+        
     }
     
 
@@ -131,6 +134,7 @@ const WeatherList = () =>{
         // console.log("test 2");
         
         getCitisCallback();
+        cacheMangement();
         
         },
         []
