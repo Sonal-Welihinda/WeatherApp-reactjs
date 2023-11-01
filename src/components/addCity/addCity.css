@@ -1,0 +1,38 @@
+#searchBox {
+    display: flex;
+    /* margin-left: auto;
+    margin-right: auto;  */
+    justify-items: center;
+    justify-content: center;
+    justify-self: center;
+    /* background-color: #1e2027; */
+    margin-top: 5vh;
+}
+
+#citySearchIP {
+    background-color: #1e2027;
+    color: white;
+    font-size: 1em;
+    border-radius: 8px;
+    padding-top: 1.4vh;
+    padding-bottom: 1.4vh;
+    text-indent: 1.2vw;
+    width: 20vw;
+    min-width: 400px;
+    
+}
+
+#searchBtn{
+    background-color: #6c5dd3;
+    padding-left: 1.2vw;
+    padding-right: 1.2vw;
+    border-color: #6c5dd3;
+    border: none;
+    font-size: 1em;
+    color: white;
+    border-radius: 8px;
+    border-color: #6c5dd3;
+    transform: translateX(-20px);
+    /* border-width: 5px; */
+    /* left: -100px; */
+}

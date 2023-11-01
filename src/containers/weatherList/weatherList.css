@@ -1,0 +1,11 @@
+#weatherListContainer{
+    margin-top: 5%;
+    width: 70vw;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    /* meadia quary gap */
+}

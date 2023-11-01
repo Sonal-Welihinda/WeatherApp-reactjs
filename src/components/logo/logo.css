@@ -1,0 +1,8 @@
+.weather-Logo{
+    display: flex;
+}
+.weather-Logo img{
+    margin-top: 8vh;
+    margin-left: auto;
+    margin-right: auto;
+}
