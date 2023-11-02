@@ -303,7 +303,7 @@
     
 }
 
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 760px) {
 
     .weather-card{
         min-width: 80vw;
