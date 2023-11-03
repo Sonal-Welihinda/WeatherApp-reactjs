@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import weatherApiKey from './creds'
+// import weatherApiKey from './creds'
 // require('dotenv').config()
 
 // import { QueryClient, QueryClientProvider } from 'react-query';
