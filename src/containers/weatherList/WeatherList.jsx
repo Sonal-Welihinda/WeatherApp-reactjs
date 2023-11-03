@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import weatherApiKey from './creds'
+// require('dotenv').config()
+
 // import { QueryClient, QueryClientProvider } from 'react-query';
 
 // import {caches} from "react";
@@ -8,7 +10,6 @@ import './weatherList.css';
 import {WeatherCard} from '../../components';
 
 import citiesFile from './cities.json';
-
 // var apiCache = {};
 
 // API call
@@ -20,7 +21,7 @@ async function weatherApiCall(cityCode){
     let params = {
         id: cityCode,
         units: "metric",
-        appid: weatherApiKey
+        appid: process.env.REACT_APP_API_KEY
     };
     
     // Create a URLSearchParams instance from the object
