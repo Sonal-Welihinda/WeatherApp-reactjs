@@ -3,7 +3,7 @@
 # This is Weather Application that shows weather with the city code using OpenWeather RestfulAPI. I have used reactJs. If you are planning to use this application, you need API key from OpenWeather API and then you need to change .env file(in main project folder not inside src) and inside that file there is variable call REACT_APP_API_KEY in this change "APIKEY-HERE" with your api key .
 
 ### Example
-as seen in above image replace the highlighted part with your api key
+as seen in below image replace the highlighted part with your api key
 
 ![image](https://github.com/Sonal-Welihinda/WeatherApp-reactjs/assets/106462621/68536a03-bf76-443c-b8a6-a2da16883a9b)
 
