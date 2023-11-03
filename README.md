@@ -1,10 +1,10 @@
 # WeatherAppV1
 
-# This is Weather Application that shows weather with the city code using OpenWeather RestfulAPI. I have used reactJs. If you are planning to use this application, you need API key from OpenWeather API and then you need to create a creds.js in (src/containers/weatherList/) and inside that file have the variable 'weatherApiKey'.
+# This is Weather Application that shows weather with the city code using OpenWeather RestfulAPI. I have used reactJs. If you are planning to use this application, you need API key from OpenWeather API and then you need to change .env file(in main project folder not inside src) and inside that file there is variable call REACT_APP_API_KEY in this change "APIKEY-HERE" with your api key .
 
 ### Example
-
-![image](https://github.com/Sonal-Welihinda/WeatherApp-reactjs/assets/106462621/b6c9838d-e651-4fc6-8f80-ddddbc4db479)
+as seen in above image replace the highlighted part with your api key
+![image](https://github.com/Sonal-Welihinda/WeatherApp-reactjs/assets/106462621/68536a03-bf76-443c-b8a6-a2da16883a9b)
 
 
 ## Here are some images of the interface.
