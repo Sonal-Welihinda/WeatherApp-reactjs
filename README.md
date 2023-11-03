@@ -4,6 +4,7 @@
 
 ### Example
 as seen in above image replace the highlighted part with your api key
+
 ![image](https://github.com/Sonal-Welihinda/WeatherApp-reactjs/assets/106462621/68536a03-bf76-443c-b8a6-a2da16883a9b)
 
 
