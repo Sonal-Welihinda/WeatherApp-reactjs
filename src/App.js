@@ -1,9 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
 
-import {AddCity, Logo} from './components'
+import { AddCity, Logo } from "./components";
 
-import {WeatherList, Footer} from './containers'
+import { WeatherList, Footer } from "./containers";
 
 function App() {
   return (
@@ -15,7 +15,6 @@ function App() {
 
       <WeatherList />
       <Footer />
-      
     </div>
   );
 }

@@ -1,14 +1,14 @@
 import React from "react";
-import './logo.css'
-import weatherLogo from '../../assets/images/logo.png'
+import "./logo.css";
+import weatherLogo from "../../assets/images/logo.png";
 
+const Logo = () => {
+  return (
+    // to show the logo
+    <div className="weather-Logo">
+      <img src={weatherLogo} alt="Weather logo" />
+    </div>
+  );
+};
 
-const Logo = () =>{
-    return(
-        <div className="weather-Logo">
-            <img src={weatherLogo} alt="Weather logo" />
-        </div>
-    );
-}
-
-export default Logo
+export default Logo;

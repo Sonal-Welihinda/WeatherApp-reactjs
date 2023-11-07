@@ -1,165 +1,107 @@
 import React, { useEffect, useState } from "react";
-// import weatherApiKey from './creds'
-// require('dotenv').config()
+import "./weatherList.css";
+import { WeatherCard } from "../../components";
 
-// import { QueryClient, QueryClientProvider } from 'react-query';
-
-// import {caches} from "react";
-// import {useQuery} from 'react-query'
-import './weatherList.css';
-import {WeatherCard} from '../../components';
-
-import citiesFile from './cities.json';
-// var apiCache = {};
+// importing API helper methods
+import { getAPIURL } from "./APIHelper.js";
+import citiesFile from "./cities.json";
 
 // API call
-async function weatherApiCall(cityCode){
-    if(cityCode == null){
-        return 403;
+async function weatherApiCall(cityCode) {
+  if (cityCode == null) {
+    return 403;
+  }
+
+  // Using ApiHelper to get url with parameters
+  let url = getAPIURL(cityCode);
+
+  try {
+    let cache = await caches.open("weatherData");
+    let cachedResponse = await cache.match(url);
+
+    if (cachedResponse) {
+      console.log("Using Cache");
+      let data = await cachedResponse.json();
+      return data;
     }
-    
-    let params = {
-        id: cityCode,
-        units: "metric",
-        appid: process.env.REACT_APP_API_KEY
-    };
-    
-    // Create a URLSearchParams instance from the object
-    let query = new URLSearchParams(params);
 
-    // Append the query string to the base URL
-    let url = 'http://api.openweathermap.org/data/2.5/group?' + query.toString();
+    let response = await fetch(url);
+    if (response.ok) {
+      let responseClone = response.clone();
+      console.log("Adding Cache");
+      await cache.put(url, responseClone);
+      return response.json();
+    } else {
+      console.error("API request failed.");
+    }
+  } catch (error) {
+    // Handle the error
+    console.error(error);
+  }
+}
 
-    
+async function getCityCodes() {
+  let weatherCards = [];
 
+  for (let i = 0; i < citiesFile.List.length; i++) {
+    let weatherData = await weatherApiCall(citiesFile.List[i]["CityCode"]);
+
+    weatherCards.push(weatherData);
+  }
+
+  return weatherCards;
+}
+
+async function cacheMangement() {
+  // using set Interval to clear the cache every 5m
+  setInterval(async function () {
     try {
-        const cache = await caches.open("weatherData");
-        const cachedResponse = await cache.match(url);
-    
-        if (cachedResponse) {
-          console.log("Using Cache");
-          const data = await cachedResponse.json();
-          return data;
-        }
-    
-        const response = await fetch(url);
-        if (response.ok) {
-          const responseClone = response.clone();
-          console.log("Adding Cache");
-          await cache.put(url, responseClone);
-          return response.json();
-        } else {
-          console.error("API request failed.");
-        }
-      } catch (error) {
-        // Handle the error
-        console.error(error);
+      let cache = await caches.open("weatherData");
+      let keys = await cache.keys();
+      for (let key of keys) {
+        await cache.delete(key);
       }
-
-}
-
-
-// export function weatherApiCallRQ(cityCode){
-//     const {isLoading,data,isError,error} = useQuery("weather1",weatherApiCall(cityCode));
-
-//     if(isError){
-//         console.log(error);
-//     }
-
-//     return (
-//         <WeatherCard weatherDATA={data} onRemove={(e) =>removeCity(data)}/>
-//     )
-
-// }
-
-
-// var weatherCards = [];
-
-
-async function getCityCodes () {
-
-    let weatherCards = [];
-
-    for(let i =0;i<citiesFile.List.length;i++){
-
-        let weatherData = await weatherApiCall(citiesFile.List[i]["CityCode"]);
-
-        weatherCards.push(weatherData);
-
+    } catch (error) {
+      console.error("Cache management error: " + error);
     }
-
-
-
-    // console.log("test 1");
-
-    return weatherCards;
+  }, 300000);
 }
 
-async function cacheMangement(){
-    setInterval(async function(){
-        try {
-            const cache = await caches.open("weatherData");
-            const keys = await cache.keys();
-            for (let key of keys) {
-              await cache.delete(key);
-            }
-        } catch (error) {
-        console.error("Cache management error: " + error);
-        }
-    },  300000);
-}
+// component
+const WeatherList = () => {
+  // in here weatherCardsState will have the all the card data and using setWeatherCards funtion we can set the list
+  // this can't be created in the top-level
+  let [weatherCardsState, setWeatherCards] = useState([]);
 
+  // get data.json file and call the api
+  async function getCitisCallback() {
+    setWeatherCards([...(await getCityCodes())]);
+  }
 
-const WeatherList = () =>{
+  // remove city function
+  // this will remove city from the ui
+  async function removeCity(removeitem) {
+    let newList = weatherCardsState.filter((item) => item != removeitem);
 
-    const [weatherCardsState,setWeatherCards] = useState([]);
+    setWeatherCards([...newList]);
+  }
 
-    // get data.json file and call the api
-    
+  useEffect(() => {
+    // calling the above getCitisCallback function to get the data from json and display it
+    getCitisCallback();
 
-    async function getCitisCallback(){
-        setWeatherCards([... await getCityCodes()]);
-        
-    }
-    
+    // in here actives the cache management
+    cacheMangement();
+  }, []);
 
-    async function removeCity(removeitem){
-        const newList = weatherCardsState.filter((item) => item != removeitem);
-
-        setWeatherCards([...newList]);
-    }
-
-
-
-    useEffect(()  =>{
-        // console.log("test 2");
-        
-        getCitisCallback();
-        cacheMangement();
-        
-        },
-        []
-    )
-    
-
-    return(
-        // {}queryClient
-        
-        
-        <div id="weatherListContainer">
-            {
-                
-                weatherCardsState.map((item) => (
-                    // console.log(item)
-                    <WeatherCard weatherDATA={item} onRemove={(e) =>removeCity(item)}/>
-                ))
-                
-                
-
-            }
-
-        </div>
-    );
-}
+  return (
+    // in here inside the weatherListContainer div putting weatherCards
+    <div id="weatherListContainer">
+      {weatherCardsState.map((item) => (
+        <WeatherCard weatherDATA={item} onRemove={(e) => removeCity(item)} />
+      ))}
+    </div>
+  );
+};
 
 export default WeatherList;
