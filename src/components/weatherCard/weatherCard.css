@@ -302,11 +302,13 @@
     margin-bottom: 1vh;
   }
 
-
+  .weather-card .wc-bottom .wc-bottom-left,
+  .weather-card .wc-bottom .wc-bottom-mid,
+  .weather-card .wc-bottom .wc-bottom-right,
   .weather-card .wc-bottom .wc-bottom-left div,
   .weather-card .wc-bottom .wc-bottom-mid div,
   .weather-card .wc-bottom .wc-bottom-right div {
-    font-size: 0.9em;
+    font-size: 0.85em;
   }
   .weather-card.active .wc-bottom {
     padding-left: 1vw;
