@@ -1,7 +1,7 @@
 import React from "react";
 import "./addCity.css";
 
-const AddCity1 = () => {
+function AddCity1 () {
   return (
     <div id="searchBox">
       <input

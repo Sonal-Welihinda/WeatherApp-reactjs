@@ -2,7 +2,7 @@ import React from "react";
 import "./logo.css";
 import weatherLogo from "../../assets/images/logo.png";
 
-const Logo = () => {
+function Logo () {
   return (
     // to show the logo
     <div className="weather-Logo">

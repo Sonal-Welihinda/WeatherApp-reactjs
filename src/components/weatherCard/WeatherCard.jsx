@@ -86,7 +86,9 @@ function onClickWeatherCardClose(weatherCityCode, event) {
   }
 }
 
-const WeatherCard = ({ weatherDATA, onRemove }) => {
+
+// Component
+function WeatherCard ({ weatherDATA, onRemove }) {
 
 
   // extracting weatherDATA into veriables

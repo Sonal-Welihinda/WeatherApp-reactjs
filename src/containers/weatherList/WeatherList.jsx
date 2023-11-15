@@ -67,8 +67,8 @@ async function cacheMangement() {
   }, 300000);
 }
 
-// component
-const WeatherList = () => {
+// Container
+function WeatherList () {
   // in here weatherCardsState will have the all the card data and using setWeatherCards funtion we can set the list
   // this can't be created in the top-level
   let [weatherCardsState, setWeatherCards] = useState([]);
