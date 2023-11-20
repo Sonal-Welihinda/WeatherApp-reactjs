@@ -40,7 +40,9 @@ async function weatherApiCall(cityCode) {
   }
 }
 
-async function getCityCodes() {
+// * in this function is will go through cities.json file and get CityCode 
+//   then make Api call using weatherApiCall add respond to weatherCards array and return the whole array
+async function getCityCodesWeather() {
   let weatherCards = [];
 
   for (let i = 0; i < citiesFile.List.length; i++) {
@@ -75,7 +77,7 @@ function WeatherList () {
 
   // get data.json file and call the api
   async function getCitisCallback() {
-    setWeatherCards([...(await getCityCodes())]);
+    setWeatherCards([...(await getCityCodesWeather())]);
   }
 
   // remove city function
