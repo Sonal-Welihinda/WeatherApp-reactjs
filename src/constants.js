@@ -1,4 +1,6 @@
 export const API_URL = "http://api.openweathermap.org/data/2.5/group?";
+
+// theses are used in WeatherCard.jsx
 export const monthsListInShort = [
     "Jan",
     "Feb",
@@ -13,12 +15,9 @@ export const monthsListInShort = [
     "Nov",
     "Dec",
   ];
-
 export const getAmPm = (hour) =>{
     return hour >= 12 ? "pm" : "am";
 }
-
-
 export const cardBgColors = {
     "few clouds": "#388ee7",
     "clear sky": "#40b681",
@@ -45,10 +44,12 @@ export const weatherCardOnClickMethods = {
     Empty:""
 }
 
+// this used in WeatherList.jsx and apiHelper.jsx
 export const weatherCacheKey = "weatherData";
-
+// this used in apiHelper.jsx
 export const weatherApiUnits = "metric";
 
+// this will return weather condtion icon url
 export const weatherConditionIcon = (icon)=>{
     return "https://openweathermap.org/img/wn/"+icon+"@2x.png";
 }

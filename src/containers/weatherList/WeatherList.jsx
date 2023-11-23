@@ -3,7 +3,7 @@ import "./weatherList.css";
 import { WeatherCard } from "../../components";
 import { weatherCacheKey } from "../../constants";
 // importing API helper methods
-import { getWeatherDataByCityCode } from "../../apiHelper/APIHelper";
+import { getWeatherDataByCityCode } from "../../apiHelper/apiHelper";
 import citiesFile from "../../data/cities.json";
 
 
