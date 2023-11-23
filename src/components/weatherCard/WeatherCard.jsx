@@ -1,37 +1,26 @@
 import React from "react";
 import "./weatherCard.css";
 import "./wc-top-bg.css";
+import closeIcon from "../../assets/images/close.png";
+import backArrowIcon from "../../assets/images/backArrow.png";
+import directionIcon from "../../assets/images/direction.png";
+import {monthsListInShort, getAmPm, cardBgColors, timeConverterParam, defualtCardBgColor, weatherCardOnClickMethods, weatherConditionIcon} from "../../constants.js";
 
 function timeConverter(UNIX_timestamp, param) {
   var a = new Date(UNIX_timestamp * 1000);
-  var months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-  var year = a.getFullYear();
-  var month = months[a.getMonth()];
+  var month = monthsListInShort[a.getMonth()];
   var date = a.getDate();
   var hour = a.getHours();
-  var ampm = hour >= 12 ? "pm" : "am";
+  var ampm = getAmPm(hour);
   hour = hour % 12;
   hour = hour ? hour : 12;
   var min = a.getMinutes();
-  var sec = a.getSeconds();
 
-  if (param == "DATE") {
+
+  if (param == timeConverterParam.date) {
     var time = hour + "." + min + " " + ampm + ", " + month + " " + date;
     return time;
-  } else if (param == "TIME") {
+  } else if (param == timeConverterParam.time) {
     var time = hour + "." + min + " " + ampm;
     return time;
   }
@@ -39,25 +28,13 @@ function timeConverter(UNIX_timestamp, param) {
   return "null";
 }
 
-var bgColors = {
-  "few clouds": "#388ee7",
-  "clear sky": "#40b681",
-  "light rain": "#de944e",
-  "scattered clouds": "#7c783b",
-  "broken clouds": "#6249cc",
-  "shower rain": "#0041d6",
-  "rain": "#001b71",
-  "thunderstorm": "#000c32",
-  "snow": "#91c7ff",
-  "mist": "#9c3a3a",
-};
 
-var whichMethod = "";
+var whichMethod = weatherCardOnClickMethods.Empty;
 function onClickWeatherCardOpen(weatherCityCode) {
   let getAllWeatherCards = document.getElementsByClassName("weather-card");
 
-  if (whichMethod == "Close" || whichMethod == "Remove") {
-    whichMethod = "";
+  if (whichMethod == weatherCardOnClickMethods.Close || whichMethod == weatherCardOnClickMethods.Remove) {
+    whichMethod = weatherCardOnClickMethods.Empty;
     return;
   }
 
@@ -70,8 +47,8 @@ function onClickWeatherCardOpen(weatherCityCode) {
   }
 }
 
-function onClickWeatherCardClose(weatherCityCode, event) {
-  whichMethod = "Close";
+function onClickWeatherCardClose(weatherCityCode) {
+  whichMethod = weatherCardOnClickMethods.Close;
 
   let getAllWeatherCards = document.getElementsByClassName("weather-card");
 
@@ -115,16 +92,16 @@ function WeatherCard ({ weatherDATA, onRemove }) {
       key={cityCode}
       id={cityCode}
       onClick={() => onClickWeatherCardOpen(cityCode)}
-    >
+      >
       {/* // <!-- card top --> */}
       <div
         className="wc-top"
-        style={{ "--bg-color": bgColors[description] ?? "#388ee7" }}
+        style={{ "--bg-color": cardBgColors[description] ?? defualtCardBgColor }}
       >
         <div className="wc-topTop">
           <div className="wc-backbtn">
             <img
-              src={require("../../assets/images/backArrow.png")}
+              src={backArrowIcon}
               alt="go back"
               onClick={() => onClickWeatherCardClose(cityCode)}
             />
@@ -133,12 +110,12 @@ function WeatherCard ({ weatherDATA, onRemove }) {
           <div>
             <div className="wc-location">{cityName + ", " + country}</div>
 
-            <div className="wc-Time">{timeConverter(date, "DATE")}</div>
+            <div className="wc-Time">{timeConverter(date, timeConverterParam.date)}</div>
           </div>
 
           <div className="wc-close">
             <img
-              src={require("../../assets/images/close.png")}
+              src={closeIcon}
               alt="close"
               onClick={() => onRemove()}
             />
@@ -149,11 +126,11 @@ function WeatherCard ({ weatherDATA, onRemove }) {
           <div className="wc-topL">
             <div className="wc-location">{cityName + ", " + country}</div>
 
-            <div className="wc-Time">{timeConverter(date, "DATE")}</div>
+            <div className="wc-Time">{timeConverter(date, timeConverterParam.date)}</div>
 
             <div className="wc-status">
               <img
-                src={"https://openweathermap.org/img/wn/" + icon + "@2x.png"}
+                src={weatherConditionIcon(icon)}
                 alt="description Icon"
               />
               <span>{description}</span>
@@ -185,24 +162,24 @@ function WeatherCard ({ weatherDATA, onRemove }) {
         {/* // <!-- card bottom left --> */}
         <div className="wc-bottom-left">
           <div>
-            <b>Pressure:</b>{" "}
+            <b>Pressure : &nbsp;</b>
             <div className="wc-Pressure">{+pressure + "hPa"}</div>
           </div>
           <div>
-            <b>Humidity:</b> <div className="wc-Humidity">{humidity + "%"}</div>
+            <b>Humidity :</b> <div className="wc-Humidity">{humidity + "%"}</div>
           </div>
           <div>
-            <b>visibility :</b>{" "}
+            <b>visibility :&nbsp;</b>
             <div className="wc-visibility">
               {(visibility / 1000).toFixed(1) + " KM"}
-            </div>{" "}
+            </div>
           </div>
         </div>
 
         {/* // <!-- card bottom mid --> */}
         <div className="wc-bottom-mid">
           <img
-            src={require("../../assets/images/direction.png")}
+            src={directionIcon}
             alt="direction"
           />
           <div>
@@ -216,12 +193,12 @@ function WeatherCard ({ weatherDATA, onRemove }) {
         <div className="wc-bottom-right">
           <div>
             <b>Sunrise:</b>
-            <div className="wc-Sunrise">{timeConverter(sunrise, "TIME")}</div>
+            <div className="wc-Sunrise">{timeConverter(sunrise, timeConverterParam.time)}</div>
           </div>
 
           <div>
             <b>Sunset:</b>
-            <div className="wc-Sunset">{timeConverter(sunset, "TIME")}</div>
+            <div className="wc-Sunset">{timeConverter(sunset, timeConverterParam.time)}</div>
           </div>
         </div>
       </div>

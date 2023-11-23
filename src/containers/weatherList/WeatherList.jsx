@@ -1,44 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./weatherList.css";
 import { WeatherCard } from "../../components";
-
+import { weatherCacheKey } from "../../constants";
 // importing API helper methods
-import { getAPIURL } from "./APIHelper.js";
-import citiesFile from "./cities.json";
+import { getWeatherDataByCityCode } from "../../apiHelper/APIHelper";
+import citiesFile from "../../data/cities.json";
 
-// API call
-async function weatherApiCall(cityCode) {
-  if (cityCode == null) {
-    return 403;
-  }
-
-  // Using ApiHelper to get url with parameters
-  let url = getAPIURL(cityCode);
-
-  try {
-    let cache = await caches.open("weatherData");
-    let cachedResponse = await cache.match(url);
-
-    if (cachedResponse) {
-      console.log("Using Cache");
-      let data = await cachedResponse.json();
-      return data;
-    }
-
-    let response = await fetch(url);
-    if (response.ok) {
-      let responseClone = response.clone();
-      console.log("Adding Cache");
-      await cache.put(url, responseClone);
-      return response.json();
-    } else {
-      console.error("API request failed.");
-    }
-  } catch (error) {
-    // Handle the error
-    console.error(error);
-  }
-}
 
 // * in this function is will go through cities.json file and get CityCode 
 //   then make Api call using weatherApiCall add respond to weatherCards array and return the whole array
@@ -46,8 +13,7 @@ async function getCityCodesWeather() {
   let weatherCards = [];
 
   for (let i = 0; i < citiesFile.List.length; i++) {
-    let weatherData = await weatherApiCall(citiesFile.List[i]["CityCode"]);
-
+    let weatherData = await getWeatherDataByCityCode(citiesFile.List[i]["CityCode"]);
     weatherCards.push(weatherData);
   }
 
@@ -58,7 +24,7 @@ async function cacheMangement() {
   // using set Interval to clear the cache every 5m
   setInterval(async function () {
     try {
-      let cache = await caches.open("weatherData");
+      let cache = await caches.open(weatherCacheKey);
       let keys = await cache.keys();
       for (let key of keys) {
         await cache.delete(key);
