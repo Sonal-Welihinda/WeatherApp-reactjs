@@ -1,7 +1,7 @@
 import React from "react";
 import "./addCity.css";
 
-function AddCity1 () {
+function AddCity () {
   return (
     <div id="searchBox">
       <input
@@ -16,4 +16,4 @@ function AddCity1 () {
   );
 };
 
-export default AddCity1;
+export default AddCity;
