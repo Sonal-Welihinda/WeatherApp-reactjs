@@ -14,7 +14,7 @@ export const monthsListInShort = [
     "Nov",
     "Dec",
 ];
-
+// these are used by weatherCard.jsx file
 export function timeConverter(UNIX_timestamp, param) {
     var dateObj = new Date(UNIX_timestamp * 1000);
   
