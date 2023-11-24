@@ -4,33 +4,9 @@ import "./wc-top-bg.css";
 import closeIcon from "../../assets/images/close.png";
 import backArrowIcon from "../../assets/images/backArrow.png";
 import directionIcon from "../../assets/images/direction.png";
-import {monthsListInShort, getAmPm, cardBgColors, timeConverterParam, defualtCardBgColor, weatherCardOnClickMethods, weatherConditionIcon} from "../../constants.js";
-
-function timeConverter(UNIX_timestamp, param) {
-  var a = new Date(UNIX_timestamp * 1000);
-
-  // monthsListInShort array is import from constants.js file
-  var month = monthsListInShort[a.getMonth()];
-  var date = a.getDate();
-  var hour = a.getHours();
-
-  // getAmPM Method is imported from constants.js file
-  var ampm = getAmPm(hour);
-  hour = hour % 12;
-  hour = hour ? hour : 12;
-  var min = a.getMinutes();
+import {timeConverter, cardBgColors, timeConverterParam, defualtCardBgColor, weatherCardOnClickMethods, weatherConditionIcon} from "../../constants.js";
 
 
-  if (param == timeConverterParam.date) {
-    var time = hour + "." + min + " " + ampm + ", " + month + " " + date;
-    return time;
-  } else if (param == timeConverterParam.time) {
-    var time = hour + "." + min + " " + ampm;
-    return time;
-  }
-
-  return "null";
-}
 
 
 var whichMethod = weatherCardOnClickMethods.Empty;

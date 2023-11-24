@@ -1,23 +1,46 @@
 export const API_URL = "http://api.openweathermap.org/data/2.5/group?";
 
-// theses are used in WeatherCard.jsx
-export const monthsListInShort = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
-export const getAmPm = (hour) =>{
-    return hour >= 12 ? "pm" : "am";
+export function timeConverter(UNIX_timestamp, param) {
+    var dateObj = new Date(UNIX_timestamp * 1000);
+
+    const monthsListInShort = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+    ];
+  
+    // monthsListInShort array is import from constants.js file
+    var month = monthsListInShort[a.getMonth()];
+    var date = dateObj.getDate();
+    var hour = dateObj.getHours();
+  
+    // getAmPM Method is imported from constants.js file
+    var ampm = hour >= 12 ? "pm" : "am";;
+    hour = hour % 12;
+    hour = hour ? hour : 12;
+    var min = dateObj.getMinutes();
+  
+  
+    if (param == timeConverterParam.date) {
+      var time = hour + "." + min + " " + ampm + ", " + month + " " + date;
+      return time;
+    } else if (param == timeConverterParam.time) {
+      var time = hour + "." + min + " " + ampm;
+      return time;
+    }
+  
+    return "null";
 }
+
 export const cardBgColors = {
     "few clouds": "#388ee7",
     "clear sky": "#40b681",
