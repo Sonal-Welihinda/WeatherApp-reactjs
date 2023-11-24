@@ -1,25 +1,25 @@
 export const API_URL = "http://api.openweathermap.org/data/2.5/group?";
 
+export const monthsListInShort = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+];
+
 export function timeConverter(UNIX_timestamp, param) {
     var dateObj = new Date(UNIX_timestamp * 1000);
-
-    const monthsListInShort = [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-    ];
   
     // monthsListInShort array is import from constants.js file
-    var month = monthsListInShort[a.getMonth()];
+    var month = monthsListInShort[dateObj.getMonth()];
     var date = dateObj.getDate();
     var hour = dateObj.getHours();
   
